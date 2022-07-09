@@ -45,6 +45,7 @@
 
     {{-- script Bootstrap --}}
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/bootstrap.js') }}"></script> --}}
 
     {{-- DATATABLES JS --}}
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>

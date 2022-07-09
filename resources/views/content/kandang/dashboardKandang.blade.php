@@ -25,10 +25,19 @@ $title = 'Dashboard Kandang';
     <br>
     <br>
 
+
     <div class="row row-cols-1 row-cols-md-2">
 
         @foreach ($masterKandang as $r)
             <div class="col mb-4">
+                @if ($r->iotModel->amonia > 25)
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Peringatan!</strong> {{ $r->alamat_kandang }} Kadar amonia melebihi 25 ppm .
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header bg-dark text-white">
                         <h4>Kandang {{ $r->alamat_kandang }}</h4>
@@ -43,6 +52,8 @@ $title = 'Dashboard Kandang';
                             </form>
                         </div>
                     </div>
+
+
                     <div class="card-body">
                         <div class="form-row" id="wadah">
 
@@ -58,8 +69,9 @@ $title = 'Dashboard Kandang';
                             </div>
                             <div class=" col dataIot">
                                 <label> Kadar Amonia</label>
-                                <input type="text" class="form-control" placeholder="Kadar Amonia" readonly
-                                    value="{{ $r->iotModel->amonia }} ppm">
+                                <input id="amonia" type="text" class="form-control" placeholder="Kadar Amonia"
+                                    readonly value="{{ $r->iotModel->amonia }} ppm">
+
                             </div>
 
                         </div>
@@ -100,7 +112,7 @@ $title = 'Dashboard Kandang';
                             $date = $r->tanggal_ayam_masuk;
                             $hitung_umur = date_diff(date_create($date), date_create($r->create_at));
                             $umur = $hitung_umur->format('%a');
-                         
+                            
                         @endphp
                         <button type="button" class="btn btn-warning btn-sm">
                             Umur <span class="badge badge-light">{{ $umur }}</span>
